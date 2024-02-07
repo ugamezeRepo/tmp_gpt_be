@@ -1,0 +1,62 @@
+SELECT * FROM USER_TBL;
+SELECT * FROM SERVER;
+SELECT * FROM CHANNEL;
+
+DROP TABLE USER_TBL CASCADE CONSTRAINTS;
+DROP SEQUENCE USER_TBL_SEQ;
+DROP TABLE CHANNEL CASCADE CONSTRAINTS;
+DROP SEQUENCE CANNEL_SEQ;
+DROP TABLE USER_CHANNEL CASCADE CONSTRAINTS;
+DROP SEQUENCE USER_CHANNEL_SEQ;
+DROP TABLE USER_SERVER CASCADE CONSTRAINTS;
+DROP SEQUENCE USER_SERVER_SEQ;
+DROP TABLE SERVER CASCADE CONSTRAINTS;
+DROP SEQUENCE SERVER_SEQ;
+
+CREATE TABLE USER_TBL (
+    user_id NUMBER NOT NULL PRIMARY KEY,
+    social_id VARCHAR2(50) NOT NULL UNIQUE,
+    email VARCHAR2(30) NOT NULL UNIQUE,
+    nickname VARCHAR2(30) UNIQUE,
+    name VARCHAR2(30),
+    profile_image VARCHAR2(30),
+    status VARCHAR2(10) DEFAULT 'YES',
+    birth VARCHAR2(10), 
+    provider VARCHAR2(10), 
+    role VARCHAR2(20), 
+    refresh_token VARCHAR2(50),
+    regdate DATE NOT NULL
+);
+CREATE SEQUENCE USER_TBL_SEQ;
+
+CREATE TABLE SERVER (
+	server_id NUMBER NOT NULL PRIMARY KEY,
+	user_id NUMBER NOT NULL,
+	server_name	VARCHAR2(50) NOT NULL,
+	regdate	DATE NOT NULL,
+	user_total	NUMBER NOT NULL	,
+	CONSTRAINT fk_user_id foreign key(user_id) references USER_TBL (user_id)
+);
+CREATE SEQUENCE SERVER_SEQ;
+
+CREATE TABLE CHANNEL (
+	channel_id	NUMBER NOT NULL	PRIMARY KEY,
+	server_id NUMBER NOT NULL,
+	channel_name VARCHAR2(50) NOT NULL,
+	CONSTRAINT fk_CHANNEL_id foreign key(server_id) references SERVER (server_id)
+);
+CREATE SEQUENCE CHANNEL_SEQ;
+
+CREATE TABLE USER_CHANNEL (
+	user_id	NUMBER	NOT NULL ,
+	channel_id	NUMBER	NOT NULL,
+	CONSTRAINT fk_user_channel_id foreign key(user_id) references USER_TBL (user_id),
+	CONSTRAINT fk_user_channel_cid foreign key(channel_id) REFERENCES CHANNEL(channel_id)
+);
+
+CREATE TABLE USER_SERVER (
+	server_id NUMBER NOT NULL,	
+	user_id	NUMBER	NOT NULL,
+	CONSTRAINT fk_user_server_id foreign key(user_id) references USER_TBL (user_id),
+	CONSTRAINT fk_user_server_sid foreign key(server_id) references SERVER (server_id)
+);
