@@ -1,5 +1,5 @@
 package com.example.tmpgpt.service;
 
-public interface UserService {
+public interface ChatService {
 
 }

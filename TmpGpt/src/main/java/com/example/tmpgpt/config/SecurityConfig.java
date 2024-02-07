@@ -16,8 +16,7 @@ public class SecurityConfig {
         throws Exception {
         // whiteList
         String[] whiteList = {
-            "/", "css/**", "js/**", "img/**",
-            "/user/loginform"
+            "/", "css/**", "js/**", "img/**", "/api/**", "api/**"
         };
 
         return httpSecurity
@@ -27,10 +26,9 @@ public class SecurityConfig {
             ).sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
             ).authorizeHttpRequests(config -> config
                     .requestMatchers(whiteList).permitAll()
-                    .requestMatchers("/admin/**").hasRole("ADMIN")
-                    .anyRequest().authenticated()
-            ).oauth2Login(withDefaults()
+                    .anyRequest().permitAll()
             ).formLogin(withDefaults()
+            ).oauth2Login(withDefaults()
             ).exceptionHandling(config -> config
                     .accessDeniedPage("/user/denied")
             ).build();

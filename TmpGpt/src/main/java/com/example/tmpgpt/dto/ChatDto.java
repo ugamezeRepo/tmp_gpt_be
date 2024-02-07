@@ -1,5 +1,5 @@
 package com.example.tmpgpt.dto;
 
-public class UserDto {
+public class ChatDto {
 
 }

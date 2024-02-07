@@ -1,5 +1,5 @@
 package com.example.tmpgpt.repository;
 
-public interface UserDao {
+public interface ChatDao {
 
 }
