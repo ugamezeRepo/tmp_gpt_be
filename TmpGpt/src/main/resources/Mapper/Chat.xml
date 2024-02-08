@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="chat">
+	<resultMap type="chatDto" id="chatDtoMap">
+		<result property="chatId" column="chat_id" />
+		<result property="roomId" column="room_id" />
+	</resultMap>
+
+	<select id="findChats" parameterType="int"
+		resultType="chatDto" resultMap="chatDtoMap">
+		SELECT
+		<include refid="allColumn" />
+		FROM chat
+		WHERE room_id=#{roomId}
+	</select>
+
+	<insert id="createChat" parameterType="chatDto">
+		INSERT INTO chat 
+		(<include refid="allColumn" />)
+		VALUES(chat_seq.NEXTVAL, #{roomId}, #{writer}, #{msg})
+	</insert>
+
+	<update id="updateRoom" parameterType="chatDto">
+		UPDATE chat
+		SET chat_name=#{chatName}
+		WHERE chat_id=#{chatId}
+	</update>
+	
+	<delete id="deleteRoom" parameterType="int">
+		DELETE FROM chat
+		WHERE chat_id=#{chatId}
+	</delete>
+
+	<sql id="allColumn">
+		chat_id, room_id, writer, msg
+	</sql>
+</mapper>
