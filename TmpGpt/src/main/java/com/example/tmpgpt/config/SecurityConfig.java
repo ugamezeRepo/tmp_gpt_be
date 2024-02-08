@@ -5,7 +5,10 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
-import static org.springframework.security.config.Customizer.withDefaults;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.reactive.CorsConfigurationSource;
+import org.springframework.web.cors.reactive.UrlBasedCorsConfigurationSource;
+import java.util.Arrays;
 
 @Configuration
 @EnableWebSecurity
@@ -20,7 +23,7 @@ public class SecurityConfig {
         };
 
         return httpSecurity
-            .cors(cors -> cors.and()
+            .cors(cors -> cors.disable()
             ).csrf(csrf -> csrf.disable()
             ).headers(headers -> headers.frameOptions(options -> options.disable())
             ).sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
@@ -30,6 +33,16 @@ public class SecurityConfig {
             ).exceptionHandling(config -> config
                     .accessDeniedPage("/user/denied")
             ).build();
+    }
+    
+    @Bean
+    CorsConfigurationSource corsConfigurationSource() {
+        CorsConfiguration configuration = new CorsConfiguration();
+        configuration.setAllowedOrigins(Arrays.asList("*"));
+        configuration.setAllowedMethods(Arrays.asList("*"));
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", configuration);
+        return source;
     }
     
 
