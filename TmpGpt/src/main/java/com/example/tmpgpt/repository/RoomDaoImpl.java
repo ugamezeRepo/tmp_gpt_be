@@ -21,20 +21,23 @@ public class RoomDaoImpl implements RoomDao {
     }
 
     @Override
+    public int getLastRoomId() {
+        return session.selectOne("room.getLastRoomId");
+    }
+
+    @Override   
     public void createRoom(RoomDto roomDto) {
         session.insert("room.createRoom", roomDto);
     }
 
     @Override
     public void updateRoom(RoomDto roomDto) {
-        // TODO Auto-generated method stub
-        
+        session.update("room.updateRoom", roomDto);
     }
 
     @Override
-    public void deleteRoom(RoomDto roomDto) {
-        // TODO Auto-generated method stub
-        
+    public void deleteRoom(int roomId) {
+        session.delete("room.deleteRoom", roomId);
     }
 
 }

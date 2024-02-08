@@ -27,8 +27,6 @@ public class SecurityConfig {
             ).authorizeHttpRequests(config -> config
                     .requestMatchers(whiteList).permitAll()
                     .anyRequest().permitAll()
-            ).formLogin(withDefaults()
-            ).oauth2Login(withDefaults()
             ).exceptionHandling(config -> config
                     .accessDeniedPage("/user/denied")
             ).build();

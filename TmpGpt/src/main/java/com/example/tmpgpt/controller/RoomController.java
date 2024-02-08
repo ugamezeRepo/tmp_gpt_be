@@ -2,11 +2,15 @@ package com.example.tmpgpt.controller;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RequestBody;
 import com.example.tmpgpt.dto.RoomDto;
 import com.example.tmpgpt.service.RoomService;
 
@@ -26,9 +30,24 @@ public class RoomController {
     }
     
     @PostMapping
-    public String createRoom(RoomDto roomDto) {
-        Boolean isCreated = roomService.createRoom(roomDto);
+    public ResponseEntity<RoomDto> createRoom(@RequestBody RoomDto roomDto) {
+        roomService.createRoom(roomDto);
         
-        return isCreated ? "방이 생성됐습니다!" : "방 생성에 실패했습니다!";
+        return ResponseEntity.ok(roomDto);
+    }
+    
+    @PatchMapping("/{roomId}")
+    public ResponseEntity<RoomDto> updateRoom(@PathVariable int roomId, @RequestBody RoomDto roomDto) {
+        roomDto.setRoomId(roomId);
+        roomService.updateRoom(roomDto);
+        
+        return null;
+    }
+    
+    @DeleteMapping("/{roomId}")
+    public ResponseEntity<RoomDto> deleteRoom(@PathVariable int roomId) {
+        roomService.deleteRoom(roomId);
+        
+        return null;
     }
 }

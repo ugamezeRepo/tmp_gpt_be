@@ -21,25 +21,18 @@ public class RoomServiceImpl implements RoomService {
     }
     
     @Override
-    public Boolean createRoom(RoomDto roomDto) {
+    public void createRoom(RoomDto roomDto) {
         roomDao.createRoom(roomDto);
-
-        int roomId = roomDto.getRoomId();
-        Boolean isCreated = roomDao.findByRoomId(roomId) != null ? true : false; 
-        
-        return isCreated;
     }
 
     @Override
     public void updateRoom(RoomDto roomDto) {
-        // TODO Auto-generated method stub
-        
+        roomDao.updateRoom(roomDto);
     }
 
     @Override
-    public void deleteRoom(RoomDto roomDto) {
-        // TODO Auto-generated method stub
-        
+    public void deleteRoom(int roomId) {
+        roomDao.deleteRoom(roomId);
     }
 
 

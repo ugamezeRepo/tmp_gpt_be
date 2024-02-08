@@ -19,6 +19,12 @@
 		FROM room
 		WHERE room_id=#{roomId}
 	</select>
+	
+	<select id="getLastRoomId"
+		resultType="int" resultMap="roomDtoMap">
+		SELECT MAX(room_id) as room_id
+		FROM room
+	</select>
 
 	<insert id="createRoom" parameterType="roomDto">
 		INSERT INTO room 
@@ -26,12 +32,16 @@
 		VALUES(room_seq.NEXTVAL, #{roomName})
 	</insert>
 
-	<update id="update" parameterType="roomDto">
+	<update id="updateRoom" parameterType="roomDto">
 		UPDATE room
-		SET
-		room_name=#{roomName}
-		WHERE roomId=#{roomId}
+		SET room_name=#{roomName}
+		WHERE room_id=#{roomId}
 	</update>
+	
+	<delete id="deleteRoom" parameterType="int">
+		DELETE FROM room
+		WHERE room_id=#{roomId}
+	</delete>
 
 	<sql id="allColumn">
 		room_id, room_name

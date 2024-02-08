@@ -8,9 +8,9 @@ public interface RoomService {
     
     public RoomDto findByRoomId(int roomId);
     
-    public Boolean createRoom(RoomDto roomDto);
+    public void createRoom(RoomDto roomDto);
     
     public void updateRoom(RoomDto roomDto);
     
-    public void deleteRoom(RoomDto roomDto);
+    public void deleteRoom(int roomId);
 }
