@@ -23,10 +23,19 @@ public class ChatServiceImpl implements ChatService {
     public void createChat(ChatDto chatDto) {
         List<ChatDto> qnaChat = new ArrayList<>();
         int roomId = chatDto.getRoomId();
+        
+        if (roomId == 0) {
+            roomId = roomDao.getLastRoomId() + 1;
+            RoomDto roomDto = new RoomDto(roomId, chatDto.getMsg());
+            roomDao.createRoom(roomDto);
+        }
+        
         ChatDto answerChatDto = new ChatDto().builder().roomId(roomId).writer("tmpGPT").msg("모르겠습니다").build();
-
+        
         qnaChat.add(chatDto);
         qnaChat.add(answerChatDto);
+
+        
         
         chatDao.createChat(qnaChat);
         
