@@ -22,7 +22,10 @@ public class RoomDaoImpl implements RoomDao {
 
     @Override
     public int getLastRoomId() {
-        return session.selectOne("room.getLastRoomId");
+        RoomDto dto = session.selectOne("room.getLastRoomId");
+        System.out.println(dto);
+
+        return dto.getRoomId();
     }
 
     @Override   

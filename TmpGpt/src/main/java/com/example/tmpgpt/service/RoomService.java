@@ -8,6 +8,8 @@ public interface RoomService {
     
     public RoomDto findByRoomId(int roomId);
     
+    public int getLastRoomId();
+    
     public void createRoom(RoomDto roomDto);
     
     public void updateRoom(RoomDto roomDto);

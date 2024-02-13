@@ -19,6 +19,11 @@ public class RoomServiceImpl implements RoomService {
     public RoomDto findByRoomId(int roomId) {
         return roomDao.findByRoomId(roomId);
     }
+
+    @Override
+    public int getLastRoomId() {
+        return roomDao.getLastRoomId();
+    }
     
     @Override
     public void createRoom(RoomDto roomDto) {
@@ -34,5 +39,6 @@ public class RoomServiceImpl implements RoomService {
     public void deleteRoom(int roomId) {
         roomDao.deleteRoom(roomId);
     }
+
 
 }

@@ -29,6 +29,11 @@ public class RoomController {
         return roomService.findByRoomId(roomId);
     }
     
+    @GetMapping("/last")
+    public int getLastRoomId() {
+        return roomService.getLastRoomId();
+    }
+    
     @PostMapping
     public ResponseEntity<RoomDto> createRoom(@RequestBody RoomDto roomDto) {
         roomService.createRoom(roomDto);

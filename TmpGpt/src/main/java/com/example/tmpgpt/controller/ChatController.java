@@ -24,6 +24,7 @@ public class ChatController {
     @PostMapping
     public void createChat(@PathVariable int roomId, @RequestBody ChatDto chatDto) {
         chatDto.setRoomId(roomId);
+        System.out.println(chatDto);
         chatService.createChat(chatDto);
     }
     
