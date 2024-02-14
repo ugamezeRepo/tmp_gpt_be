@@ -4,11 +4,13 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.example.tmpgpt.dto.RoomDto;
+import com.example.tmpgpt.repository.ChatDao;
 import com.example.tmpgpt.repository.RoomDao;
 
 @Service
 public class RoomServiceImpl implements RoomService {
     @Autowired RoomDao roomDao;
+    @Autowired ChatDao chatDao;
 
     @Override
     public List<RoomDto> findAllRooms() {
@@ -37,6 +39,7 @@ public class RoomServiceImpl implements RoomService {
 
     @Override
     public void deleteRoom(int roomId) {
+        chatDao.deleteChatByRoomId(roomId);
         roomDao.deleteRoom(roomId);
     }
 

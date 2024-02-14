@@ -31,9 +31,8 @@ public class ChatDaoImpl implements ChatDao {
     }
 
     @Override
-    public void deleteChat(int chatId) {
-        // TODO Auto-generated method stub
-        
+    public void deleteChatByRoomId(int roomId) {
+        session.delete("chat.deleteChat", roomId);
     }
 
 }

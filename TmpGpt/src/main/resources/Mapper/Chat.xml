@@ -20,15 +20,9 @@
 		VALUES(chat_seq.NEXTVAL, #{roomId}, #{writer}, #{msg})
 	</insert>
 
-	<update id="updateRoom" parameterType="chatDto">
-		UPDATE chat
-		SET chat_name=#{chatName}
-		WHERE chat_id=#{chatId}
-	</update>
-	
-	<delete id="deleteRoom" parameterType="int">
+	<delete id="deleteChat" parameterType="int">
 		DELETE FROM chat
-		WHERE chat_id=#{chatId}
+		WHERE room_id=#{roomId}
 	</delete>
 
 	<sql id="allColumn">

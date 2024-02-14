@@ -46,6 +46,7 @@ public class RoomController {
         roomDto.setRoomId(roomId);
         roomService.updateRoom(roomDto);
         
+        System.out.println(roomDto);
         return null;
     }
     

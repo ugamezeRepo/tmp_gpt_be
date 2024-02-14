@@ -11,6 +11,7 @@
 		SELECT
 		<include refid="allColumn" />
 		FROM room
+		ORDER BY room_id DESC
 	</select>
 
 	<select id="findByRoomId" parameterType="int"

@@ -10,5 +10,5 @@ public interface ChatDao {
     
     public void updateChat(ChatDto chatDto);
     
-    public void deleteChat(int chatId);
+    public void deleteChatByRoomId(int roomId);
 }
